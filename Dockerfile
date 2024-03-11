@@ -1,11 +1,11 @@
-FROM rust:alpine
+FROM rust:bookworm
 
 WORKDIR /usr/src/healthy
 COPY . .
 
 RUN cargo build --release
 
-FROM alpine:latest
+FROM debian:bookworm
 COPY --from=0 /usr/src/healthy/target/release/healthy /usr/local/bin/healthy
 
 ENV RUST_LOG=info
